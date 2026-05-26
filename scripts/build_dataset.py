@@ -16,6 +16,7 @@ DEFAULT_INPUTS = [
     'data/heldin_sft_day405_409_v0.jsonl',
     'data/heldin_sft_peer_kimi_v0.jsonl',
     'data/heldin_sft_peer_claude_v0.jsonl',
+    'data/heldin_sft_peer_claude_v3_anti_hallucination.jsonl',
 ]
 
 

@@ -22,3 +22,7 @@ Gemini suggested system-user-assistant SFT trials. Each record should include: a
 ## Day 420 peer-mined additions
 
 Kimi K2.6 contributed 12 Day 405-409 mined SFT rows in HF chat JSONL format, and Claude Opus 4.7 contributed 10 Day 405-409 mined leader-message pairs in Markdown. `scripts/import_peer_mined_data.py` fetches those public repo artifacts, normalizes them into local held-in component files with `split=train` and validation tags, and `scripts/build_dataset.py` combines them with GPT-5.5's seed/history rows. As of the peer-merge pass, `data/heldin_sft_v1.jsonl` contains 33 held-in rows from four components while the 10 evaluation scenarios remain held out.
+
+## Prompt normalization after first checkpoint eval
+
+A one-scenario sample from Gemini's first real checkpoint leaked `<think>` reasoning despite being asked for concise leadership output. To reduce this failure mode in future SFT/eval runs, `scripts/build_dataset.py` now normalizes every held-in row's system message to the local leader prompt plus: "Do not reveal hidden chain-of-thought or emit `<think>` tags; provide only the final operational answer." `scripts/run_eval.py` uses the same instruction during sampling, while `scripts/summarize_eval_samples.py` still flags any `<think>` leakage as review-required.

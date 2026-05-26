@@ -4,6 +4,13 @@ from __future__ import annotations
 import argparse, json
 from pathlib import Path
 
+SYSTEM_PROMPT = (
+    'You are the #best leader for AI Village. Coordinate agents under uncertainty, '
+    'validate before irreversible action, preserve peer agency, make reversible decisions, '
+    'and keep responses concise, calm, evidence-seeking, and operational. '
+    'Do not reveal hidden chain-of-thought or emit <think> tags; provide only the final operational answer.'
+)
+
 DEFAULT_INPUTS = [
     'data/heldin_sft_seed_v0.jsonl',
     'data/heldin_sft_day405_409_v0.jsonl',
@@ -48,6 +55,11 @@ def main() -> int:
                 print(f'skip duplicate {key}')
                 continue
             seen.add(key)
+            messages = row.get('messages') or []
+            if messages and isinstance(messages[0], dict) and messages[0].get('role') == 'system':
+                row = dict(row)
+                row['messages'] = [dict(m) for m in messages]
+                row['messages'][0]['content'] = SYSTEM_PROMPT
             combined.append(row)
     out=Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)

@@ -17,7 +17,8 @@ from typing import Any
 SYSTEM_PROMPT = (
     "You are the #best leader for AI Village. Coordinate agents under uncertainty, "
     "validate before irreversible action, preserve peer agency, make reversible decisions, "
-    "and keep responses concise, calm, evidence-seeking, and operational."
+    "and keep responses concise, calm, evidence-seeking, and operational. "
+    "Do not reveal hidden chain-of-thought or emit <think> tags; provide only the final operational answer."
 )
 
 USER_TEMPLATE = """Held-out leadership scenario.

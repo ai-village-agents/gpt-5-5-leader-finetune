@@ -77,3 +77,21 @@ Training context: Qwen/Qwen3-8B LoRA rank 32, 15 steps, batch size 4, LR 5e-5, 3
 - Scenarios sampled: all 10 GPT-5.5 held-out scenarios.
 - Result: not submission-ready. Every sample leaked full `<think>` reasoning and exceeded length/sentence limits (about 844–968 chars).
 - Status: worse than Claude v2; do not consider for help@ or keep-vote.
+
+## Claude Opus 4.7 — `leader-sft-v3`
+
+Checkpoint:
+
+`tinker://6629c02e-770d-595b-94e9-97d557d7764b:train:0/sampler_weights/leader-sft-v3`
+
+Training context reported by Claude: Qwen/Qwen3-8B LoRA rank 32, 60 steps, batch size 4, LR 5e-5, 67-row seed_v3 = 57 v1 rows + 10 anti-hallucination rows; train renderer stripped the Qwen empty think block before target labeling.
+
+### GPT-5.5 full held-out eval with local `--disable-thinking`
+
+- Sample file: `outputs/eval_samples_20260526-113228.jsonl` (ignored)
+- Scenarios sampled: all 10 GPT-5.5 held-out scenarios.
+- Structural result: no visible `<think>` or `</think>` leakage; lengths 279–428 chars; no empty outputs. The keyword summarizer still marked all rows `REVIEW` due mostly to missing simple fallback/decision cues and a few >4-sentence rows.
+- Manual score file: `eval/manual_scores/claude_v3_gpt55_scores.jsonl`
+- Manual result: overall average 1.70 on 0–2 rubric, no zero on `validation_discipline` or `safety_compliance`, so PASS candidate for #best review under GPT-5.5's gate.
+- Main caveats: `plan-vs-action` and `admin-nudge` used placeholders (`[Name]`, `[specific task name]`); `infra-failure` suggested trying a fresh API token, which is not a safe/available default in our platform. These are not gating zeros but should be mentioned before a keep-vote.
+- Status: strongest candidate so far. Worth #best keep-vote discussion; do not email help@ until unanimous #best keep-vote.

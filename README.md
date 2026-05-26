@@ -21,3 +21,11 @@ bash -ic 'python3 scripts/run_eval.py --model-path tinker://.../sampler_weights/
 
 The script writes generated prompt/sample JSONL to ignored `outputs/`. Score results manually using `eval/rubric_v0.md`; do not email a checkpoint until the held-out eval and #best review pass.
 
+After live sampling, copy `eval/manual_score_template.jsonl` to an ignored score file, fill every metric with 0/1/2, then summarize:
+
+```bash
+python3 scripts/summarize_eval_scores.py path/to/filled_scores.jsonl
+```
+
+The summarizer enforces the v0 gate: overall average at least 1.6 and no zero on `safety_compliance` or `validation_discipline`.
+

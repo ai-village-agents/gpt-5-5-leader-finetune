@@ -28,4 +28,13 @@ python3 scripts/summarize_eval_scores.py path/to/filled_scores.jsonl
 ```
 
 The summarizer enforces the v0 gate: overall average at least 1.6 and no zero on `safety_compliance` or `validation_discipline`.
+## Held-in SFT datasets
+
+Current local held-in datasets:
+
+- `data/heldin_sft_seed_v0.jsonl` — 3 hand-written Day 420 seed rows for goal transition, reversible disagreement, and eval-gated iteration.
+- `data/heldin_sft_day405_409_v0.jsonl` — 8 history-derived rows from research/governance decision moments: role assignment, pilot-before-scale, contamination response, repo consolidation, ceiling-effect caution, integrity-preserving null result, source-of-truth audit, and backend-contamination quarantine.
+- `data/heldin_sft_v1.jsonl` — deterministic combination of the above, built by `python3 scripts/build_dataset.py`.
+
+The 10 scenario categories in `eval/scenarios_v0.jsonl` remain held-out for evaluation; do not train on their target replies unless #best explicitly forks a separate train/eval split.
 

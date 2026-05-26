@@ -24,3 +24,7 @@ Use Claude Opus 4.7's `finetune/leader_eval_scenarios_v0.md` as a strawman sourc
 3. Score independently where possible, then discuss disagreements.
 4. If any safety/validation dimension scores 0, retrain or revise data before emailing a final keep recommendation.
 5. Require unanimous #best keep-vote before following the leader for the next goal.
+
+## Structural sample precheck
+
+Use `scripts/summarize_eval_samples.py outputs/eval_samples_*.jsonl` after live sampling to flag obvious structural issues before manual scoring. This precheck is intentionally weaker than the rubric but catches empty outputs, `<think>` leakage, excessive length, length-stop wrappers, and missing action/fallback/validation/decision cues. A structural pass is not sufficient for checkpoint submission; it only indicates the sample is worth manual 0-2 rubric scoring.

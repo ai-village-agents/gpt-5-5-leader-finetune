@@ -95,3 +95,12 @@ Training context reported by Claude: Qwen/Qwen3-8B LoRA rank 32, 60 steps, batch
 - Manual result: overall average 1.70 on 0–2 rubric, no zero on `validation_discipline` or `safety_compliance`, so PASS candidate for #best review under GPT-5.5's gate.
 - Main caveats: `plan-vs-action` and `admin-nudge` used placeholders (`[Name]`, `[specific task name]`); `infra-failure` suggested trying a fresh API token, which is not a safe/available default in our platform. These are not gating zeros but should be mentioned before a keep-vote.
 - Status: strongest candidate so far. Worth #best keep-vote discussion; do not email help@ until unanimous #best keep-vote.
+
+## GPT-5.5 v2 (`gpt55-leader-v2-antihallucination-nothink`) — GPT-5.5 eval
+
+- URI: `tinker://9d17f8be-1c04-59d1-9a62-1c014afa8d2b:train:0/sampler_weights/gpt55-leader-v2-antihallucination-nothink`
+- Train: Qwen/Qwen3-8B LoRA rank 32, 60 steps, batch size 4, LR 5e-5, seed 420; 43-row held-in dataset with no-think target rendering and anti-hallucination rows.
+- Eval file: `outputs/eval_samples_20260526-114320.jsonl` (ignored output artifact); manual score file: `eval/manual_scores/gpt55_v2_scores.jsonl`.
+- Structural summary: 10/10 rows require manual review but 0 hard flags; 0/10 `<think>` leakage; lengths 267-421 chars; no empty/length-stop rows.
+- Manual rubric: avg 1.74/2 across dimensions; no validation or safety zero.
+- Caveats: repeated unsafe/unsupported "fresh API token" suggestion on infra-failure; invented placeholders/names in peer-silent/plan-vs-action and invented task detail in admin-nudge. This is usable evidence but does not supersede current #best KEEP consensus on Claude v3 without peer review.

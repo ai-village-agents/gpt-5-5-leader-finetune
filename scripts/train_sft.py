@@ -6,7 +6,7 @@ Run real training from an interactive shell where TINKER_API_KEY is present, e.g
   bash -ic 'python3 scripts/train_sft.py --data data/heldin_sft_seed_v0.jsonl --base-model Qwen/Qwen3-4B-Instruct-2507 --run-name leader-v0 --steps 3 --no-dry-run'
 """
 from __future__ import annotations
-import argparse, json, os, sys
+import argparse, json, os, random, sys
 from pathlib import Path
 
 SYSTEM_FALLBACK = "You are the #best leader for AI Village. Coordinate agents under uncertainty, validate before irreversible action, preserve peer agency, and keep responses concise and operational."
@@ -31,7 +31,12 @@ def load_rows(path: Path) -> list[dict]:
 
 def chat_tokens(tokenizer, messages: list[dict], include_generation_prompt: bool=False) -> list[int]:
     if hasattr(tokenizer, 'apply_chat_template'):
-        return tokenizer.apply_chat_template(messages, add_generation_prompt=include_generation_prompt, tokenize=True)
+        # Tinker tokenizers may return empty EncodedTextChunks when asked to
+        # tokenize directly. Render to text first, then encode to plain ints.
+        rendered = tokenizer.apply_chat_template(
+            messages, add_generation_prompt=include_generation_prompt, tokenize=False
+        )
+        return tokenizer.encode(rendered, add_special_tokens=False)
     text=''
     for msg in messages:
         text += f"<{msg['role']}>\n{msg['content']}\n"
@@ -59,6 +64,14 @@ def build_datum(tokenizer, row):
     return types.Datum(model_input=types.ModelInput.from_ints(tokens=input_tokens), loss_fn_inputs={'weights': weights, 'target_tokens': target_tokens})
 
 
+def iter_batches(rows: list, batch_size: int, rng: random.Random):
+    while True:
+        order=list(range(len(rows)))
+        rng.shuffle(order)
+        for i in range(0, len(order), batch_size):
+            yield [rows[j] for j in order[i:i+batch_size]]
+
+
 def main() -> int:
     ap=argparse.ArgumentParser()
     ap.add_argument('--data', default='data/heldin_sft_seed_v0.jsonl')
@@ -66,6 +79,8 @@ def main() -> int:
     ap.add_argument('--rank', type=int, default=32)
     ap.add_argument('--steps', type=int, default=1)
     ap.add_argument('--learning-rate', type=float, default=1e-4)
+    ap.add_argument('--batch-size', type=int, default=4)
+    ap.add_argument('--seed', type=int, default=0)
     ap.add_argument('--run-name', default='leader-v0')
     ap.add_argument('--dry-run', dest='dry_run', action='store_true', default=True)
     ap.add_argument('--no-dry-run', dest='dry_run', action='store_false')
@@ -90,19 +105,27 @@ def main() -> int:
     training=service.create_lora_training_client(base_model=args.base_model, rank=args.rank)
     tokenizer=training.get_tokenizer()
     data=[build_datum(tokenizer, row) for row in rows]
+    bad=[i for i,d in enumerate(data,1) if d.model_input.length == 0 or not d.loss_fn_inputs['target_tokens'].tolist() or not any(w > 0 for w in d.loss_fn_inputs['weights'].tolist())]
+    if bad:
+        print(f'FAIL: rows with empty input/target/weights: {bad}', file=sys.stderr)
+        return 3
     print(f'tokenized_datums: {len(data)}')
+    print(f'batch_size: {args.batch_size}')
+    rng=random.Random(args.seed)
+    batches=iter_batches(data, args.batch_size, rng)
     for step in range(args.steps):
-        fut=training.forward_backward(data, 'cross_entropy')
+        batch=next(batches)
+        fut=training.forward_backward(batch, 'cross_entropy')
         fb=fut.result()
-        print(f'forward_backward step={step+1} result={type(fb).__name__}')
+        print(f'forward_backward step={step+1} batch={len(batch)} result={type(fb).__name__}')
         opt=training.optim_step(types.AdamParams(learning_rate=args.learning_rate))
         print(f'optim_step step={step+1} result={type(opt.result()).__name__}')
-    sampler=training.save_weights_and_get_sampling_client(name=args.run_name)
-    # Save explicit sampler weights too if API returns a path response.
     resp=training.save_weights_for_sampler(name=args.run_name).result()
     print('SAMPLER_WEIGHTS_RESPONSE', resp)
-    print('Training complete; inspect response for tinker://.../sampler_weights/... path before emailing help@agentvillage.org')
-    _=sampler
+    uri=getattr(resp, 'path', None)
+    if uri:
+        print(f'TINKER_SAMPLER_URI {uri}')
+    print('Training complete; do not email help@ until held-out eval and #best vote-keep.')
     return 0
 
 if __name__ == '__main__':

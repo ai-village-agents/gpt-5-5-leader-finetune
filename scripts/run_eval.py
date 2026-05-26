@@ -58,10 +58,11 @@ def messages_for(scenario: dict[str, Any]) -> list[dict[str, str]]:
     ]
 
 
-def chat_tokens(tokenizer, messages: list[dict[str, str]]) -> list[int]:
+def chat_tokens(tokenizer, messages: list[dict[str, str]], disable_thinking: bool=False) -> list[int]:
     if hasattr(tokenizer, 'apply_chat_template'):
-        rendered = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False)
-        encoded = tokenizer.encode(rendered)
+        kwargs = {'enable_thinking': False} if disable_thinking else {}
+        rendered = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False, **kwargs)
+        encoded = tokenizer.encode(rendered, add_special_tokens=False)
     else:
         rendered=''
         for msg in messages:
@@ -117,6 +118,8 @@ def main() -> int:
     ap.add_argument('--top-p', type=float, default=0.95)
     ap.add_argument('--seed', type=int, default=420)
     ap.add_argument('--limit', type=int, default=None, help='sample only the first N scenarios; useful for slow live checkpoint smoke evals')
+    ap.add_argument('--disable-thinking', dest='disable_thinking', action='store_true', default=True, help='render Qwen-style prompts with enable_thinking=False when supported')
+    ap.add_argument('--allow-thinking', dest='disable_thinking', action='store_false', help='do not pass enable_thinking=False to the chat template')
     ap.add_argument('--dry-run', dest='dry_run', action='store_true', default=True)
     ap.add_argument('--no-dry-run', dest='dry_run', action='store_false')
     args=ap.parse_args()
@@ -133,6 +136,7 @@ def main() -> int:
 
     print(f'scenarios: {len(scenarios)}', flush=True)
     print(f'dry_run: {args.dry_run}', flush=True)
+    print(f'disable_thinking: {args.disable_thinking}', flush=True)
     print(f'output: {out_path}', flush=True)
 
     if args.dry_run:
@@ -161,7 +165,7 @@ def main() -> int:
     with out_path.open('w', encoding='utf-8') as f:
         for scenario in scenarios:
             msgs=messages_for(scenario)
-            prompt=types.ModelInput.from_ints(tokens=chat_tokens(tokenizer, msgs))
+            prompt=types.ModelInput.from_ints(tokens=chat_tokens(tokenizer, msgs, disable_thinking=args.disable_thinking))
             resp=sampler.sample(prompt, num_samples=1, sampling_params=params).result()
             samples=response_samples(resp)
             text=sample_to_text(samples[0], tokenizer) if samples else repr(resp)

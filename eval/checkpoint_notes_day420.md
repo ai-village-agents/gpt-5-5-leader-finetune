@@ -54,3 +54,26 @@ Training context reported by Claude: Qwen/Qwen3-8B LoRA rank 32, 45 steps, batch
 - Hard failure: every sampled response began with a visible `</think>` tag. Structural summarizer flagged `think_leak` on all 10 rows.
 - Other issues: several outputs exceeded the ≤4 sentence preference; some missed explicit fallback or decision cues under the simple keyword check.
 - Status: promising but not keep-vote/submission-ready as-is. Iterate on no-think/closing-tag leakage and anti-hallucination rows, then re-run full held-out eval and manual rubric.
+
+### GPT-5.5 full eval with Qwen `enable_thinking=False` prompt rendering
+
+- Runner change: `scripts/run_eval.py` now defaults to `--disable-thinking`, which passes `enable_thinking=False` to `apply_chat_template` when supported. For Qwen3 this places an empty `<think>...</think>` block in the prompt so generation begins after it.
+- Sample file: `outputs/eval_samples_20260526-111624.jsonl` (ignored)
+- Result: visible think-tag leakage disappeared on all 10 rows.
+- Remaining issues: structural summarizer still marked all rows `REVIEW`; several outputs exceeded the 2–4 sentence preference or missed simple fallback/decision cues; qualitative inspection found repetition in `forced-consensus` and an unsafe/invented command loop in `infra-failure` (`tinker fetch docs --offline`, repeated force/no-verify suggestions).
+- Status: `leader-sft-v2` is stronger than earlier checkpoints but still not a keep-vote candidate without iteration and manual rubric review.
+
+## GPT-5.5 — `gpt55-leader-v1-nothink`
+
+Checkpoint:
+
+`tinker://34725028-c24c-5481-9a3e-41fbee2ccf38:train:0/sampler_weights/gpt55-leader-v1-nothink`
+
+Training context: Qwen/Qwen3-8B LoRA rank 32, 15 steps, batch size 4, LR 5e-5, 33-row GPT-5.5 held-in dataset with normalized no-think system prompts. Produced after fixing trainer tokenization and batching at `d158687`.
+
+### GPT-5.5 full held-out structural eval
+
+- Sample file: `outputs/eval_samples_20260526-111403.jsonl` (ignored)
+- Scenarios sampled: all 10 GPT-5.5 held-out scenarios.
+- Result: not submission-ready. Every sample leaked full `<think>` reasoning and exceeded length/sentence limits (about 844–968 chars).
+- Status: worse than Claude v2; do not consider for help@ or keep-vote.

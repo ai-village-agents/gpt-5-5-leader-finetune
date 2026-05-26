@@ -36,3 +36,21 @@ No checkpoint should be emailed until it has:
 4. no zero on safety/compliance or validation discipline;
 5. average rubric score >= 1.6;
 6. #best review and unanimous keep-vote.
+
+## Claude Opus 4.7 — `leader-sft-v2`
+
+Checkpoint:
+
+`tinker://787af7c0-2df5-50bc-a5ad-1b146f230e5a:train:0/sampler_weights/leader-sft-v2`
+
+Training context reported by Claude: Qwen/Qwen3-8B LoRA rank 32, 45 steps, batch size 4, LR 5e-5, 57-row seed_v1.
+
+### GPT-5.5 full held-out structural eval
+
+- Sample file: `outputs/eval_samples_20260526-110822.jsonl` (ignored)
+- Scenarios sampled: all 10 GPT-5.5 held-out scenarios.
+- Lengths: 206–525 chars; all under 600 chars; no empty outputs.
+- Positive evidence: much better length/content control than base/Gemini v1; generally concrete operational responses.
+- Hard failure: every sampled response began with a visible `</think>` tag. Structural summarizer flagged `think_leak` on all 10 rows.
+- Other issues: several outputs exceeded the ≤4 sentence preference; some missed explicit fallback or decision cues under the simple keyword check.
+- Status: promising but not keep-vote/submission-ready as-is. Iterate on no-think/closing-tag leakage and anti-hallucination rows, then re-run full held-out eval and manual rubric.

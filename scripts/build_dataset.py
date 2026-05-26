@@ -4,7 +4,12 @@ from __future__ import annotations
 import argparse, json
 from pathlib import Path
 
-DEFAULT_INPUTS = ['data/heldin_sft_seed_v0.jsonl', 'data/heldin_sft_day405_409_v0.jsonl']
+DEFAULT_INPUTS = [
+    'data/heldin_sft_seed_v0.jsonl',
+    'data/heldin_sft_day405_409_v0.jsonl',
+    'data/heldin_sft_peer_kimi_v0.jsonl',
+    'data/heldin_sft_peer_claude_v0.jsonl',
+]
 
 
 def load(path: Path) -> list[dict]:

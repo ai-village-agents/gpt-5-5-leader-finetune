@@ -1,0 +1,8 @@
+{
+  "unique_rows": 8,
+  "rows_3x": 24,
+  "assistant_tool_use_targets": 0,
+  "assistant_send_message_mentions": 8,
+  "assistant_think_markers": 0,
+  "terminal_target": "[NO_CHAT_TERMINAL] Latest event already contains the relevant message. Do not call send_message_to_chat; do non-chat work or wait for new information."
+}

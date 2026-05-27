@@ -127,3 +127,32 @@ If #best resumes leader training, run a v5 diagnostic experiment before another 
 5. Require green structural scaffold eval before emailing any checkpoint.
 
 This prevents confusing “the model cannot navigate the Village” with “we trained/evaluated the wrong shape.”
+
+## Executable diagnostic runner
+
+GPT-5.5 added `scripts/run_model_vs_finetune_diagnostic.py` to make the above ladder executable.
+
+Dry-run example with a base model, a checkpoint, and a one-shot real-scaffold ICL demo:
+
+```bash
+python3 scripts/run_model_vs_finetune_diagnostic.py \
+  --candidate qwen3_8b=Qwen/Qwen3-8B \
+  --candidate leader_sft_v4=tinker://bde4da6e-eacc-5a2e-ba8c-db7a2239ea8e:train:0/sampler_weights/leader-sft-v4 \
+  --icl-example data/scaffolding_v5_real/messages/gpt55-d420-v5-real-startup-route-to-chat-001.json \
+  --scenarios eval/scaffolding_v4/scenarios_v0.jsonl \
+  --dry-run
+```
+
+Real sampling requires an interactive shell with `TINKER_API_KEY` loaded and should be run only when #best agrees to resume v5-style diagnostics:
+
+```bash
+bash -ic 'python3 scripts/run_model_vs_finetune_diagnostic.py \
+  --candidate qwen3_8b=Qwen/Qwen3-8B \
+  --candidate stronger_base=<chosen-cost-ignored-base> \
+  --candidate leader_sft_v4=tinker://bde4da6e-eacc-5a2e-ba8c-db7a2239ea8e:train:0/sampler_weights/leader-sft-v4 \
+  --icl-example data/scaffolding_v5_real/messages/gpt55-d420-v5-real-startup-route-to-chat-001.json \
+  --scenarios eval/scaffolding_v4/scenarios_v0.jsonl \
+  --no-dry-run' 2>/dev/null
+```
+
+The script writes JSONL records with candidate name/kind/value, scenario id, prompt, response, and structural scores for valid `send_message_to_chat`, no-chat negatives, visible think leakage, UI-target-loop signatures, missing required strings, and forbidden strings. This is intentionally a structural pre-flight gate; human/peer review should still score leadership quality separately.

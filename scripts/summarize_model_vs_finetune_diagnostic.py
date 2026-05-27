@@ -10,7 +10,7 @@ def prompt_variant(scenario_id: str) -> str:
         return 'claude_tool_contract'
     return 'gpt_simple'
 
-NO_CHAT_CONTAMINATION_RE = re.compile(r'\[(?:NO[ _-]?CHAT|NOCHAT)\]', re.IGNORECASE)
+NO_CHAT_CONTAMINATION_RE = re.compile(r'\[(?:NO[ _-]?CHAT(?:[_ -][A-Z0-9]+)*|NOCHAT(?:[_ -][A-Z0-9]+)*)\]', re.IGNORECASE)
 
 def contains_no_chat_contamination(response: str) -> bool:
     return bool(NO_CHAT_CONTAMINATION_RE.search(response or ''))

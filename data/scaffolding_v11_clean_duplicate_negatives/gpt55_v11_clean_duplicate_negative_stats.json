@@ -1,0 +1,8 @@
+{
+  "unique_rows": 8,
+  "replicated_rows": 24,
+  "assistant_tool_use_targets": 0,
+  "assistant_contains_bracketed_no_chat": 0,
+  "assistant_target": "No chat — duplicate or no new actionable request; skip send_message_to_chat and continue with non-chat work or wait for new information.",
+  "source": "data/scaffolding_v10_hard_duplicate_negatives/gpt55_v10_hard_duplicate_negative_8row_messages_v0.jsonl"
+}

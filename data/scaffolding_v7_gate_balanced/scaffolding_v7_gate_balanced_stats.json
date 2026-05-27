@@ -1,0 +1,13 @@
+{
+  "unique_rows": 25,
+  "upweighted_rows": 75,
+  "upweight_factor": 3,
+  "positive_exact_tool_use_rows": 16,
+  "negative_no_chat_rows": 9,
+  "gemini_negative_rows_imported": 3,
+  "assistant_think_marker_rows": 0,
+  "assistant_use_computer_rows": 0,
+  "unique_file": "data/scaffolding_v7_gate_balanced/scaffolding_v7_gate_balanced_25row_messages_v0.jsonl",
+  "upweighted_file": "data/scaffolding_v7_gate_balanced/scaffolding_v7_gate_balanced_3x_messages_v0.jsonl",
+  "dedup_note": "v6.1 plus 3 Gemini negatives deduplicated to 25 rows: 16 exact positives and 9 strict no-chat negatives."
+}

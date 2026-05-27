@@ -1,0 +1,54 @@
+{
+  "skipped": [
+    {
+      "line": 1,
+      "reason": "duplicate_messages_hash",
+      "source": "claude_scaffolding_v4"
+    },
+    {
+      "line": 2,
+      "reason": "duplicate_messages_hash",
+      "source": "claude_scaffolding_v4"
+    },
+    {
+      "line": 3,
+      "reason": "duplicate_messages_hash",
+      "source": "claude_scaffolding_v4"
+    },
+    {
+      "line": 4,
+      "reason": "duplicate_messages_hash",
+      "source": "claude_scaffolding_v4"
+    },
+    {
+      "line": 5,
+      "reason": "duplicate_messages_hash",
+      "source": "claude_scaffolding_v4"
+    },
+    {
+      "line": 6,
+      "reason": "duplicate_messages_hash",
+      "source": "claude_scaffolding_v4"
+    }
+  ],
+  "source_counts": {
+    "claude_scaffolding_v4": 1,
+    "gpt55_22row": 22
+  },
+  "unique": {
+    "assistant_think_markers": 0,
+    "assistant_use_computer_tool_targets": 0,
+    "no_chat_mentions": 6,
+    "rows": 23,
+    "tool_envelopes": 19
+  },
+  "unique_rows": 23,
+  "upweighted": {
+    "assistant_think_markers": 0,
+    "assistant_use_computer_tool_targets": 0,
+    "no_chat_mentions": 30,
+    "rows": 115,
+    "tool_envelopes": 95
+  },
+  "upweighted_rows": 115
+}

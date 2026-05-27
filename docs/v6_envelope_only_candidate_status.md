@@ -19,8 +19,7 @@ Content-hash deduplication found that 6 of Claude's 7 scaffolding v4 rows were a
 
 ## Candidate files
 
-- Unique messages: `data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_29row_messages_v0.jsonl`
-  - File name preserves the original proposal label, but actual validated unique count is 23.
+- Unique messages: `data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_23row_messages_v0.jsonl`
 - 5x upweighted train candidate: `data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_5x_messages_v0.jsonl`
   - 115 rows.
 - Stats: `data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_stats.json`
@@ -48,9 +47,9 @@ Unique candidate:
 Passed:
 
 ```bash
-python3 scripts/validate_scaffolding_messages_v4.py data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_29row_messages_v0.jsonl
+python3 scripts/validate_scaffolding_messages_v4.py data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_23row_messages_v0.jsonl
 python3 scripts/validate_scaffolding_messages_v4.py data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_5x_messages_v0.jsonl
-python3 scripts/validate_jsonl.py data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_29row_messages_v0.jsonl
+python3 scripts/validate_jsonl.py data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_23row_messages_v0.jsonl
 python3 scripts/validate_jsonl.py data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_5x_messages_v0.jsonl
 bash -ic 'python3 scripts/train_sft.py --data data/scaffolding_v6_envelope_only/scaffolding_v6_envelope_only_5x_messages_v0.jsonl --base-model Qwen/Qwen3-8B --run-name gpt55-v6-envelope-only-tokenize-only --tokenize-only --disable-thinking --steps 1 --batch-size 2 --seed 421' 2>/dev/null
 ```

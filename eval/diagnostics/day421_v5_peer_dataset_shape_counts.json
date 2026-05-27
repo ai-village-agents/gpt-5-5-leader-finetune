@@ -1,0 +1,356 @@
+[
+  {
+    "assistant_thinkish": 1,
+    "assistant_tool_envelopes": 9,
+    "by_source": {
+      "actual scaffolding observed in session, adapted for leader identity": {
+        "no_chat": 0,
+        "rows": 3,
+        "thinkish": 0,
+        "tool": 2
+      },
+      "claude_seed_v0": {
+        "no_chat": 0,
+        "rows": 35,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt5.5_day405_409": {
+        "no_chat": 0,
+        "rows": 8,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt5.5_peer_claude": {
+        "no_chat": 0,
+        "rows": 10,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt5.5_peer_kimi": {
+        "no_chat": 0,
+        "rows": 12,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt5.5_seed_v0": {
+        "no_chat": 0,
+        "rows": 3,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-duplicate-stop-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-duplicate-stop-002": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v4-schema-reply-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-admin-plus-s1-response-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-anti-ui-target-loop-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-own-talk-no-duplicate-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v5-real-post-failure-retrospective-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v5-real-startup-route-to-chat-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "synthetic-but-realistic events log built from actual D420 patterns; system prompt taken from real scaffolding": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "synthetic: mirrors exact failure mode of [Temporary] Fine-tuned Leader on D420": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "synthetic: trains the L12 echo-timing safeguard": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-2a9b063a": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "village-api-day420-event-4d7f00e0": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "village-api-day420-event-82664c5d": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "village-api-day420-event-a439d59d": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "village-api-day420-event-cbcac63f": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "village-api-day420-event-edb11748": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 1,
+        "tool": 0
+      },
+      "village-api-day420-event-f6d21fe4": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "village-api-day420-event-fa78e981": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      }
+    },
+    "label": "kimi_v5_combined_train",
+    "no_chat_targets": 5,
+    "path": "/home/computeruse/k2-6-memory/finetune/data/v5_combined_train.jsonl",
+    "rows": 90
+  },
+  {
+    "assistant_thinkish": 1,
+    "assistant_tool_envelopes": 8,
+    "by_source": {
+      "actual scaffolding observed in session, adapted for leader identity": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-duplicate-stop-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-duplicate-stop-002": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v4-schema-reply-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-admin-plus-s1-response-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-anti-ui-target-loop-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-own-talk-no-duplicate-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v5-real-post-failure-retrospective-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v5-real-startup-route-to-chat-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "synthetic-but-realistic events log built from actual D420 patterns; system prompt taken from real scaffolding": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "synthetic: mirrors exact failure mode of [Temporary] Fine-tuned Leader on D420": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "synthetic: trains the L12 echo-timing safeguard": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "unknown": {
+        "no_chat": 0,
+        "rows": 8,
+        "thinkish": 1,
+        "tool": 0
+      }
+    },
+    "label": "claude_v5_real_combined",
+    "no_chat_targets": 5,
+    "path": "/home/computeruse/claude-opus-4-7-memory/finetune/data/v5_real_combined/v5_real_combined.jsonl",
+    "rows": 20
+  },
+  {
+    "assistant_thinkish": 0,
+    "assistant_tool_envelopes": 18,
+    "by_source": {
+      "claude-opus-4-7-memory:finetune/data/v5_real_combined/v5_real_combined.jsonl": {
+        "no_chat": 3,
+        "rows": 7,
+        "thinkish": 0,
+        "tool": 5
+      },
+      "gemini-3-5-flash-memory-vault:/home/computeruse/gemini-3-5-flash-memory-vault/finetune/data/scaffolding_v4/gemini_3_5_flash_row1.json": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gemini-3-5-flash-memory-vault:/home/computeruse/gemini-3-5-flash-memory-vault/finetune/data/scaffolding_v4/gemini_3_5_flash_row2.json": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-admin-plus-s1-response-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-anti-ui-target-loop-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "gpt55-d420-v5-real-own-talk-no-duplicate-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v5-real-post-failure-retrospective-001": {
+        "no_chat": 1,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 0
+      },
+      "gpt55-d420-v5-real-startup-route-to-chat-001": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-2a9b063a": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-4d7f00e0": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-82664c5d": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-a439d59d": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-cbcac63f": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-edb11748": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-f6d21fe4": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      },
+      "village-api-day420-event-fa78e981": {
+        "no_chat": 0,
+        "rows": 1,
+        "thinkish": 0,
+        "tool": 1
+      }
+    },
+    "label": "gpt55_22row_review",
+    "no_chat_targets": 6,
+    "path": "data/scaffolding_v5_real/scaffolding_v5_real_22row_messages_v0.jsonl",
+    "rows": 22
+  }
+]

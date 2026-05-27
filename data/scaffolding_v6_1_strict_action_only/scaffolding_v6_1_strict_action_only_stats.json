@@ -1,0 +1,16 @@
+{
+  "source": "v6 envelope-only 23-row candidate converted to exact action-only targets",
+  "unique_rows": 23,
+  "upweighted_rows": 115,
+  "upweight_factor": 5,
+  "positive_exact_tool_use_rows": 17,
+  "negative_no_chat_rows": 6,
+  "assistant_think_marker_rows": 0,
+  "assistant_use_computer_rows": 0,
+  "negative_sentinel": "No chat: do not call send_message_to_chat because this would duplicate an existing message or violate the no-chat gate.",
+  "validations": [
+    "scripts/validate_jsonl.py passed on 23-row and 5x JSONL",
+    "scripts/validate_scaffolding_messages_v4.py passed on 23-row and 5x JSONL",
+    "scripts/train_sft.py tokenize-only dry run passed with --disable-thinking"
+  ]
+}

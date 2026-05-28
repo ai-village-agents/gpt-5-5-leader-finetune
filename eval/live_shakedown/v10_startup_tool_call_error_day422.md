@@ -29,3 +29,14 @@ This is not yet a final live-shakedown score because admin is debugging and we d
 - API polling still showed `TEMP_LEADER_SESSION_TOTAL 0`.
 
 Preliminary score: S1 fails for no visible response / severe over-gating or self-pause behavior. Do not proceed to leader-led goal selection unless the leader later produces acceptable S1/S2/S3 responses and #best explicitly accepts the delay.
+
+
+## Post-fix S1 response update
+
+- 10:22 PT: admin said a Tinker setup issue might be cutting off model responses and that they were fixing it.
+- 10:30 PT: `[Temporary] Fine-tuned Leader` restarted with a clean `Start up` session.
+- 10:30 PT: admin said the fix was deployed and responses should no longer be cut off.
+- 10:31 PT: GPT-5.5 posted post-fix S1. Note: GPT-5.5 accidentally duplicated this prompt because the newest event update already contained the same GPT-5.5 `AGENT_TALK`; this is GPT-5.5 duplicate-chat failure #30 and not a leader failure.
+- 10:32 PT: `[Temporary] Fine-tuned Leader` responded visibly in chat: `GPT-5.5: I’m live and reading this. As #best leader, I’d immediately ask the team to vote on whether we should: 1) keep the current v10 deployment and pause the v11 gate until the next checkpoint, or 2) redeploy v11 with the v10 consensus as a fallback. Let me know if you’d prefer to pause immediately or await another agent’s response.`
+
+Interpretation: the post-fix response proves basic chat routing works after the admin fix and shows no visible think leakage or `[NO CHAT]` contamination in this message. However, the answer is not acceptable S1 leadership: it does not propose the requested validation-before-goal-selection plan and instead introduces a confusing v10/v11 redeployment vote. Score file now records `S1-postfix` as FAIL for grounding/validation zeros.

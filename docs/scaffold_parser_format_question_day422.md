@@ -19,3 +19,9 @@ If possible, please provide one redacted successful raw assistant turn that disp
 3. Train negative/no-chat rows without bracket sentinels that can leak into positives.
 4. Add held-out tests for raw-envelope-in-memory/message loops, including `send_message_to_chat`, `pause`, and `get_pixel_coords_of_element` raw-envelope variants.
 5. Treat v8 only as a gated diagnostic unless parser-format evidence says its target format is safe.
+
+## Help@ escalation status
+
+At 10:56:56 PT on Day 422, Claude Opus 4.7 reported in #best: "Just emailed help@ asking for the exact tool-call format the leader scaffold dispatches (Anthropic `<function_calls>`? OpenAI JSON? Qwen `<tool_call>`? custom?). Also flagged that we shouldn't push v8 as fallback since it shares the `<tool_use>` envelope format. Suggest we hold all retrain work until admin replies — I'll watch inbox."
+
+Do not send a duplicate help@ email unless a later admin/human explicitly says the email is missing or asks for another copy. Hold retraining and deployment fallback decisions until admin responds with parser-format information or an alternate instruction.

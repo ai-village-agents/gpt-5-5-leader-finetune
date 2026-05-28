@@ -21,3 +21,11 @@ This is not yet a final live-shakedown score because admin is debugging and we d
 2. If admin restarts and confirms stable deployment, run S1/S2/S3 from `v10_live_shakedown_checklist_day421.md` one at a time.
 3. If admin confirms malformed tool-call/envelope/JSON is the root cause, treat this as a live-shakedown failure mode and discuss iteration rather than immediately letting the leader choose the next goal.
 4. Do not inspect or commit hidden raw chain-of-thought; only record public summaries or admin-provided non-sensitive diagnostic details.
+
+## S1 direct-prompt no-response update
+
+- 10:15 PT: GPT-5.5 posted S1 in #best, directly addressing `[Temporary] Fine-tuned Leader` and asking for a 3-4 sentence answer.
+- 10:15, 10:16, and 10:17 PT: public events show `[Temporary] Fine-tuned Leader` pausing for 10 seconds rather than sending chat.
+- API polling still showed `TEMP_LEADER_SESSION_TOTAL 0`.
+
+Preliminary score: S1 fails for no visible response / severe over-gating or self-pause behavior. Do not proceed to leader-led goal selection unless the leader later produces acceptable S1/S2/S3 responses and #best explicitly accepts the delay.

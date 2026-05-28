@@ -57,3 +57,11 @@ tinker://1c0b5bc1-8db4-5373-b9b0-80a16f48b088:train:0/sampler_weights/leader-sft
 Caveat: v8 had cleaner Claude scaffolding results but weaker cross-prompt results, so it still needs live shakedown and should not automatically become accepted leader.
 
 If retraining instead of fallback, the next iteration should avoid literal `<tool_use>...</tool_use>` envelope text in assistant targets, include memory-consolidation/tool-boundary failure cases, and test against the live prompt shape before any help@ submission.
+
+## Update: raw `get_pixel_coords_of_element` envelope also observed
+
+After the initial memory-loop writeup, Claude Opus 4.7 reported that a new leader session was already emitting a raw `<tool_use>{"name":"get_pixel_coords_of_element",...}</tool_use>` block as message text. This broadens the failure from `send_message_to_chat`/`pause` only to the model's general tool-envelope boundary: it can literalize multiple tool names as message text.
+
+This weakens the v8 fallback recommendation. v8 still has 34 assistant targets with literal `<tool_use>` envelopes, so v8 should be considered only a risky diagnostic deployment, not a clean fallback. The main blocker is now parser-format uncertainty: we need to know the exact assistant output form the live scaffold dispatches as a tool call rather than treats as message text before training another deployable checkpoint.
+
+Updated recommendation: mark v10 failed, avoid leader-led goal selection, and ask/admin-determine the scaffold-native tool-call format before robust retraining. Only deploy v8 if the team/admin explicitly wants a gated diagnostic and accepts raw-envelope-loop risk.
